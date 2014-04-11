@@ -4,6 +4,8 @@
 #include "FileManager.hh"
 #include "ObjectManager.hh"
 
+#include "ProgressBar.hh"
+
 #include <iostream>
 #include <string>
 
@@ -70,8 +72,6 @@ int main(int argc, char** argv)
 
   if( applyCuts ) std::cout << "applying cuts!" << std::endl;
 
-  Utilities::RTIReader* rti = Utilities::RTIReader::Instance();
-
 
   // Define histogram
 
@@ -92,6 +92,14 @@ int main(int argc, char** argv)
   int countPassed = 0;
   int countAll = 0;
 
+
+  // Construct RTI reader and progress bar
+  Utilities::RTIReader* rti = Utilities::RTIReader::Instance();
+  const Utilities::RTIData* data = rti->GetRTIData(0);
+  (void) data;
+
+  Utilities::ProgressBar progressBar(nbins);
+  progressBar.PrintScale();
 
   //
   // TRAVERSE
@@ -117,6 +125,8 @@ int main(int argc, char** argv)
 
     // See explanation for offset by start above
     liveTime->SetBinContent(i - start + 1, data->GetLiveTime());
+
+    progressBar.Update(i);
   }
   //
   // End
@@ -155,4 +165,3 @@ int main(int argc, char** argv)
 
   return EXIT_SUCCESS;
 }
-
