@@ -34,11 +34,11 @@ int main(int argc, char** argv)
 
 
   //Default start time
-  std::string StartUnixTime = "1337558400";
+  std::string StartUnixTime = "1307303287";
   config.GetValue("OPTIONS","StartUnixTime",StartUnixTime, "Start unix time for the loop");
 
   //Default end time
-  std::string EndUnixTime = "1337644799";
+  std::string EndUnixTime = "1385483852";
   config.GetValue("OPTIONS","EndUnixTime",EndUnixTime, "End unix time for the loop");
 
 
@@ -85,7 +85,7 @@ int main(int argc, char** argv)
   //              =                nbins
   //
   // Off-Set whole diagram by 0.5 to left, so time-stamps are center of bins.
-  TH1D* liveTime = new TH1D("liveTime","live time vs time after ams start;time / s;live time", nbins, 0.5, nbins+0.5);
+  TH1F* liveTime = new TH1F("liveTime","live time vs time after ams start;time / s;live time", nbins, 0.5, nbins+0.5);
 
 
   // Count statistics
